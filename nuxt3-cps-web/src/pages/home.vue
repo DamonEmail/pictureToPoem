@@ -15,7 +15,7 @@ import { ref, reactive, computed } from "vue";
 .route {
   width: 80%;
   min-width: 900px;
-  background-color: aqua;
+  // background-color: aqua;
   margin: 0 auto;
   flex: 1;
 }
