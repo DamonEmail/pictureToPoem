@@ -47,4 +47,13 @@ export default defineNuxtConfig({
   },
   modules: ["@ant-design-vue/nuxt"],
   css: ["~/assets/styles/global.less"], // 全局样式
+  nitro: {
+    devProxy: {
+      "/api": {
+        target: "http://localhost:5000", // 这里是接口地址
+        changeOrigin: true,
+        prependPath: true,
+      },
+    },
+  },
 });
