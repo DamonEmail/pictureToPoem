@@ -6,6 +6,11 @@ export default defineNuxtConfig({
   alias: {
     "@": "/<srcDir>",
   },
+  runtimeConfig: {
+    public: {
+      api: process.env.VITE_BASE_URL,
+    },
+  },
   components: [
     // 配置全局组件目录
     {
