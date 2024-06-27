@@ -50,7 +50,10 @@ export default defineNuxtConfig({
     },
     plugins: [VueSetupExtend()],
   },
-  modules: ["@ant-design-vue/nuxt"],
+  modules: ["@ant-design-vue/nuxt", "@nuxtjs/i18n"],
+  i18n: {
+    vueI18n: "./src/i18n.config.ts",
+  },
   css: ["~/assets/styles/global.less"], // 全局样式
   nitro: {
     devProxy: {

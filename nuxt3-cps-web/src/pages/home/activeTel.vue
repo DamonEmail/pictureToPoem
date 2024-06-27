@@ -2,7 +2,7 @@
   <div class="main">
     <div class="box-contain">
       <div v-for="item in boxes" :key="item.name">
-        {{ item.name }}
+        {{ item.name }}{{ i18n.t("home") }}
       </div>
     </div>
     <div class="footer">
@@ -19,6 +19,7 @@
 
 <script setup name="activeTel">
 import { ref, reactive } from "vue";
+const i18n = useI18n();
 const current1 = ref(1);
 const current2 = ref(2);
 const onChange = (pageNumber) => {
@@ -46,11 +47,13 @@ const boxes = ref([
 ]);
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .main {
+  background-color: #f2f3f5;
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 25px;
   .box-contain {
     width: 100%;
     flex: 1;
@@ -60,8 +63,8 @@ const boxes = ref([
     flex-wrap: wrap;
     align-content: flex-start;
     > div {
-      margin-left: 40px;
-      width: 220px;
+      margin-left: 37px;
+      width: 210px;
       height: 180px;
       display: inline-block;
       border: 1px solid black;
@@ -75,6 +78,7 @@ const boxes = ref([
     // background-color: aquamarine;
     text-align: center;
     position: relative;
+
     .sign {
       height: 50px;
       width: 100%;

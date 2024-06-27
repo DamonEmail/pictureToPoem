@@ -1,22 +1,29 @@
 <template>
   <div class="header">
-    <div class="search_box">
-      <div class="logo">测试LOGO</div>
-      <a-input-search
-        v-model:value="value"
-        style="width: 300px"
-        placeholder="请输入"
-        enter-button
-        @search="onSearch"
-      />
+    <!-- <div class="search_box"> -->
+    <div class="logo">便宜购</div>
+    <!-- <div class="search_box">
+      
+    </div> -->
+    <div class="navbarList">
+      <div
+        class="listItem chosedList"
+        v-for="item in navbarList"
+        :key="item.title"
+      >
+        {{ item.title }}
+      </div>
     </div>
-    <div
-      class="navbarList chosedList"
-      v-for="item in navbarList"
-      :key="item.title"
-    >
-      {{ item.title }}
-    </div>
+    <!-- <a-tab-pane key="2" tab="Tab 2" disabled>Tab 2</a-tab-pane>
+      <a-tab-pane key="3" tab="Tab 3">Tab 3</a-tab-pane> -->
+    <a-input-search
+      v-model:value="value"
+      style="width: 300px"
+      placeholder="请输入"
+      enter-button
+      @search="onSearch"
+    />
+    <!-- </div> -->
   </div>
 </template>
 
@@ -28,6 +35,7 @@ const navbarList = [
     url: "/home/activeTel",
   },
 ];
+const activeKey = ref("");
 const value = ref(""); // 搜索内容
 
 const emits = defineEmits(["search"]);
@@ -35,30 +43,48 @@ const emits = defineEmits(["search"]);
 
 <style lang="less" scoped>
 .header {
-  height: 150px;
-  background-color: black;
+  height: 60px;
+  background-color: #fff;
   width: 100%;
   box-sizing: border-box;
-  padding: 15px;
+  padding: 15px 12vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 5px;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.06);
   .search_box {
-    width: 60%;
+    width: 30%;
     margin: 0 auto;
-    height: 60px;
+    // height: 60px;
     display: flex;
     justify-content: space-between;
     .logo {
-      color: white;
+      color: #8a919f;
     }
   }
   .navbarList {
-    color: white;
+    position: relative;
+    color: #8a919f;
     width: 60%;
     margin: 0 auto;
     cursor: pointer;
-  }
-  .chosedList {
-    color: #1677ff;
-    text-decoration: underline;
+    > div {
+      display: inline-block;
+      width: 120px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      &:hover {
+        color: #1677ff;
+        // border-bottom: 2px solid #1677ff;
+      }
+    }
+    .chosedList {
+      color: #1677ff !important;
+      // text-decoration: underline;
+      border-bottom: 2px solid #1677ff;
+    }
   }
 }
 </style>
