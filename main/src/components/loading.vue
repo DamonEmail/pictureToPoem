@@ -20,13 +20,17 @@ import { ref, reactive } from "vue";
 
 <style lang="less" scoped>
 #he {
+  position: fixed;
+  left: 49%;
+  top: 59%;
+  transform: translate(-50%, -50%);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  //   background-color: #232e6d;
   background-color: rgba(red, green, blue, 0);
+  z-index: 9999;
   ul {
     height: 200px;
     list-style: none;

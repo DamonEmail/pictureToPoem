@@ -17,9 +17,7 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive } from "vue";
-</script>
+<script></script>
 
 <style lang="less">
 @import "./error.less";

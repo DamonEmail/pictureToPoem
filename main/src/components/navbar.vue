@@ -1,8 +1,12 @@
 <template>
   <!-- 功能元素 -->
   <div class="navBar">
-    <div v-for="item in toolBoxes" class="tool-boxes" @click="switchUrl">
-      <img class="tool-img" width="55px" src="" alt="" />
+    <div
+      v-for="item in toolBoxes"
+      class="tool-boxes"
+      @click="switchUrl(item.url)"
+    >
+      <img class="tool-img" width="55px" :src="item.imgUrl" alt="" />
       <div class="tool-info">
         <span class="tool-title">{{ item.title }}</span>
         <span class="tool-detail">{{ item.detail }}</span>
@@ -13,29 +17,25 @@
 
 <script setup>
 import { ref, reactive } from "vue";
+import picToPoemImg from "./../assets/image/picToPoem.jpg";
 let a = ref([1]);
 const router = useRouter();
 let toolBoxes = ref([
   {
     title: "图片匹配诗句",
     detail: "自动识别图片信息生成对应的古诗信息",
-    url: "/404",
+    url: "/picToPoem",
+    imgUrl: picToPoemImg,
   },
-  {
-    title: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    url: "/404",
-    detail:
-      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  },
-  { title: 3, detail: "xxxx", url: "/404" },
 ]);
 const switchUrl = (url) => {
-  navigateTo("/404");
+  navigateTo(url);
 };
 </script>
 
 <style lang="less" scoped>
 .navBar {
+  z-index: 10000;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   width: 50vw; /* 电脑端默认宽度 */
