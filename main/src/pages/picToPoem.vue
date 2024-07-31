@@ -3,6 +3,11 @@
     <div class="landscape"></div>
     <div class="filter"></div>
     <canvas class="canvas" width="1920" height="911" ref="canvas"></canvas>
+    <RightCircleOutlined
+      @click="checkPoem"
+      class="checkIcon"
+      v-show="!isShowUpload"
+    />
     <a-upload
       v-show="isShowUpload"
       capture="false"
@@ -38,39 +43,62 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, computed } from "vue";
 
 const isShowUpload = ref(true);
 const isLoading = ref(false);
+let index = ref(0);
+let len = ref(4);
+let poemShow = computed(() => {
+  if (poemData.value.length == 0) {
+    return poemKey;
+  } else {
+    return poemData.value[index.value];
+  }
+});
 const fileUploadRes = ({ file }) => {
   if (["error", "done"].includes(file.status)) {
     if (file.status == "done") {
       poemData.value.length = 0;
       poemData.value.push(...file.response);
       isShowUpload.value = false;
-      if (poemData.value.length > 0) {
-        Object.keys(poemShow).forEach((key) => {
-          poemShow[key] = poemData.value[0][key];
-        });
-      }
       // 图片操作
       const reader = new FileReader();
       reader.onload = (e) => {
-        poemShow["imgUrl"] = e.target.result;
+        poemData.value.forEach((v) => {
+          v["imgUrl"] = e.target.result;
+        });
+        // poemShow["imgUrl"] = e.target.result;
       };
       reader.readAsDataURL(file.originFileObj);
     }
     isLoading.value = false;
   }
 };
+// 古诗切换
+const checkPoem = () => {
+  if (index.value < len.value) {
+    index.value = index.value + 1;
+  } else {
+    index.value = 0;
+  }
+};
+
 const poemData = ref([]);
-const poemShow = reactive({
-  id: "xx",
-  paragraphs: ["xxxxxx", "xxxxx", "xxxxx", "xxxxx"],
-  title: "xxx",
-  author: "xx",
+let poemKey = {
+  id: "",
+  paragraphs: [],
+  title: "",
+  author: "",
   imgUrl: null,
-});
+};
+// const poemShow = reactive({
+//   id: "xx",
+//   paragraphs: ["xxxxxx", "xxxxx", "xxxxx", "xxxxx"],
+//   title: "xxx",
+//   author: "xx",
+//   imgUrl: null,
+// });
 
 // 文件检查
 const uploadFileCheck = (file, fileList) => {
@@ -352,5 +380,17 @@ onMounted(() => {
   animation: colorChange 30s ease-in-out infinite;
   animation-fill-mode: both;
   mix-blend-mode: overlay;
+}
+.checkIcon {
+  position: fixed;
+  cursor: pointer;
+  right: 15px;
+  top: 15px;
+  color: white;
+  font-size: 2rem;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
 }
 </style>
