@@ -11,7 +11,7 @@
     <a-upload
       v-show="isShowUpload"
       capture="false"
-      acceot="image/*"
+      accept="image/*"
       action="/api/upload"
       :maxCount="1"
       :onChange="fileUploadRes"
