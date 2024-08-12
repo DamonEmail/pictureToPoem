@@ -3,11 +3,29 @@
     <div class="landscape"></div>
     <div class="filter"></div>
     <canvas class="canvas" width="1920" height="911" ref="canvas"></canvas>
-    <RightCircleOutlined
-      @click="checkPoem"
-      class="checkIcon"
-      v-show="!isShowUpload"
-    />
+    <div class="tool">
+      <HomeOutlined @click="goback" class="checkIconBack" />
+      <VerticalLeftOutlined
+        @click="checkPoem"
+        class="checkIcon"
+        v-show="!isShowUpload"
+      />
+      <a-upload
+        v-show="!isShowUpload"
+        class="uploadAgain"
+        capture="false"
+        accept="image/*"
+        action="/api/upload"
+        :maxCount="1"
+        :onChange="fileUploadRes"
+        :beforeUpload="uploadFileCheck"
+        name="image"
+        :show-file-list="false"
+      >
+        <CloudUploadOutlined />
+      </a-upload>
+    </div>
+
     <a-upload
       v-show="isShowUpload"
       capture="false"
@@ -258,6 +276,10 @@ function degToRad(deg) {
   return deg * (Math.PI / 180);
 }
 
+const goback = () => {
+  navigateTo("/");
+};
+
 onMounted(() => {
   if (canvas.value) {
     ctx = canvas.value.getContext("2d");
@@ -381,16 +403,37 @@ onMounted(() => {
   animation-fill-mode: both;
   mix-blend-mode: overlay;
 }
-.checkIcon {
+
+.tool {
   position: fixed;
   cursor: pointer;
-  right: 15px;
+  right: 62px;
   top: 15px;
   color: white;
   font-size: 2rem;
-  opacity: 0.5;
-  &:hover {
-    opacity: 1;
+  display: flex;
+  align-items: center;
+  width: 100px;
+  justify-content: space-around;
+  .anticon {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+.uploadAgain {
+  position: fixed;
+  cursor: pointer;
+  right: 20px;
+  top: 7px;
+  color: white;
+  font-size: 2rem;
+  .anticon {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 </style>
